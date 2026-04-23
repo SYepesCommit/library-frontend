@@ -1,36 +1,62 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+#  Library Management System - Frontend
 
-## Getting Started
+Interfaz de usuario moderna y profesional para la gestión de bibliotecas, construida como parte de la prueba técnica para **Grupo Nex**. Esta aplicación se comunica con una API GraphQL para gestionar el ciclo de vida de préstamos de libros.
 
-First, run the development server:
+##  Características Principales
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+- **Dashboard de Libros:** Visualización de disponibilidad en tiempo real.
+- **Gestión de Usuarios:** Registro de nuevos lectores.
+- **Sistema de Reservas:** Flujo intuitivo con validaciones de negocio (Máximo 3 libros).
+- **Control de Devoluciones:** Interfaz para liberar libros con alertas de plazos excedidos.
+- **Historial Avanzado:** Consultas con filtros por rango de fechas.
+
+## Stack Tecnológico
+
+- **Framework:** [Next.js 14](https://nextjs.org/) (App Router).
+- **Lenguaje:** TypeScript.
+- **Estilos:** Tailwind CSS.
+- **Componentes de UI:** Ant Design (v5).
+- **Cliente API:** GraphQL Request.
+- **Notificaciones:** React Hot Toast.
+
+---
+
+##  Configuración del Entorno
+
+Para que el frontend se comunique correctamente con el backend, debes configurar las variables de entorno.
+
+1. Crea un archivo `.env` en la raíz de este proyecto.
+2. Añade la URL de tu servidor GraphQL (NestJS) (El puerto puede variar en cuestion del ambiente de prueba que este corriendo, ajustar el puerto si es necesario por el que levante tanto el back como el front):
+
+```env
+NEXT_PUBLIC_API_URL=http://localhost:3000/graphql
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 1. Instalación y Ejecución
+Clonar el repositorio:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```env
+git clone [https://github.com/SYepesCommit/library-frontend.git](https://github.com/SYepesCommit/library-frontend.git)
+cd library-frontend
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+2. Instalar dependencias:
 
-## Learn More
+```env
+pnpm install
+```
 
-To learn more about Next.js, take a look at the following resources:
+3. Iniciar en modo desarrollo:
+```env
+pnpm dev
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## La aplicación se abrirá en http://localhost:3000.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Estructura de Carpetas
+- app/: Rutas y páginas principales (Next.js App Router).
+- src/components/: Componentes segmentados por módulos (Books, Users, Reservations).
+- src/graphql/: Definición de Queries y Mutations.
+- src/hooks/: Hooks personalizados para la gestión de datos (SWR/Fetch).
+- src/lib/: Configuración del cliente GraphQL.
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
