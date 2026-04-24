@@ -21,6 +21,15 @@ Interfaz de usuario moderna y profesional para la gestión de bibliotecas, const
 
 ---
 
+### Prerrequisitos de Sistema
+- Antes de iniciar la interfaz, asegúrate de contar con:
+
+- Node.js Runtime: v20.x o superior.
+
+- PNPM: Gestor de paquetes recomendado (instalar con npm install -g pnpm).
+
+- Backend Activo: El servidor de la API (NestJS) debe estar corriendo para que el Frontend pueda consumir los datos.
+
 
 ## 1. Instalación y Ejecución
 Clonar el repositorio:
