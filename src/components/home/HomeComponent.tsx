@@ -42,19 +42,30 @@ export default function HomeComponent() {
    * Se utiliza `useMemo` para evitar cálculos costosos en cada renderizado 
    * si las dependencias no han cambiado.
    */
+/**
+   * filteredBooks - Lista procesada con filtrado y ordenamiento.
+   * 1. Filtrado: Se aplica un filtro que combina búsqueda por texto (título o autor)
+   *    y un filtro de estado (disponible, reservado, o todos).
+   */
   const filteredBooks = useMemo(() => {
-    return books.filter((book) => {
-      // Normalización para búsqueda insensible a mayúsculas/minúsculas
+    const filtered = books.filter((book) => {
       const matchesSearch = 
         book.title.toLowerCase().includes(searchText.toLowerCase()) ||
         book.author.toLowerCase().includes(searchText.toLowerCase());
       
-      // Validación lógica del estado de disponibilidad
       const matchesStatus = 
         statusFilter === 'all' ? true :
         statusFilter === 'available' ? book.isAvailable : !book.isAvailable;
 
       return matchesSearch && matchesStatus;
+    });
+
+    return filtered.sort((a, b) => {
+      if (a.isAvailable !== b.isAvailable) {
+        return a.isAvailable ? -1 : 1;
+      }
+      
+      return a.title.localeCompare(b.title);
     });
   }, [books, searchText, statusFilter]);
 
