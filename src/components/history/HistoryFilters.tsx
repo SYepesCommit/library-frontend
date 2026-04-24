@@ -17,10 +17,10 @@ export const HistoryFilters = ({
   onDateChange: (dates: [dayjs.Dayjs | null, dayjs.Dayjs | null] | null) => void; 
   loadingUsers: boolean 
 }) => (
-  <Card className="mb-6 shadow-sm border-slate-100 bg-slate-50/50">
-    <div className="flex flex-wrap gap-6">
-      <div className="flex-1 min-w-[250px]">
-        <Text strong className="block mb-2 text-slate-500 text-xs uppercase">Filtrar Usuario</Text>
+  <Card className="mb-6 shadow-sm border-slate-100 bg-slate-50/50" style={{ marginBottom:16}}>
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div className="w-full">
+        <Text strong className="block mb-2 text-slate-500 text-xs uppercase text-nowrap">Filtrar Usuario</Text>
         <Select
           showSearch
           placeholder="Selecciona un usuario"
@@ -31,8 +31,8 @@ export const HistoryFilters = ({
           options={users?.map((u: User) => ({ label: u.name, value: u.id }))}
         />
       </div>
-      <div className="flex-1 min-w-[300px]">
-        <Text strong className="block mb-2 text-slate-500 text-xs uppercase">Rango de Fechas (Reserva)</Text>
+      <div className="w-full">
+        <Text strong className="block mb-2 text-slate-500 text-xs uppercase text-nowrap">Rango de Fechas</Text>
         <RangePicker 
           className="w-full" 
           onChange={onDateChange}
