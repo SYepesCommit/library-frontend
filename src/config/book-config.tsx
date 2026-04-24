@@ -7,3 +7,9 @@ export const genderOptions = gender.map(g => ({
   label: g,
   value: g
 }));
+
+export const statusOptions = [
+            { value: 'all', label: 'Todos los libros' },
+            { value: 'available', label: 'Disponibles' },
+            { value: 'reserved', label: 'Reservados' },
+          ]

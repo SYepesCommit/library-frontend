@@ -2,6 +2,7 @@
 
 import { Input, Select, Card } from 'antd';
 import { SearchOutlined, FilterOutlined } from '@ant-design/icons';
+import { statusOptions } from '@/src/config/book-config';
 
 const { Search } = Input;
 
@@ -14,7 +15,9 @@ interface BookFiltersProps {
 
 export const BookFilters = ({ onSearchChange, onStatusChange }: BookFiltersProps) => {
   return (
-    <Card className="mb-8 shadow-sm border-slate-100 bg-slate-50/50">
+    <Card className="shadow-sm border-slate-100 bg-slate-50/50" style={{
+      marginBottom: 24
+    }}>
       <div className="flex flex-col md:flex-row gap-4">
         <Search
           placeholder="Buscar por título o autor..."
@@ -30,11 +33,7 @@ export const BookFilters = ({ onSearchChange, onStatusChange }: BookFiltersProps
           className="w-full md:w-64"
           suffixIcon={<FilterOutlined />}
           onChange={onStatusChange}
-          options={[
-            { value: 'all', label: 'Todos los libros' },
-            { value: 'available', label: 'Disponibles' },
-            { value: 'reserved', label: 'Reservados' },
-          ]}
+          options={statusOptions}
         />
       </div>
     </Card>
