@@ -4,7 +4,7 @@ import { GET_RESERVATIONS_BY_USER } from '../graphql/reservations';
 import { Reservation } from '../types/reservation';
 
 export const useUserReservations = (userId?: number) => {
-  const fetcher = ({ query, variables }: any) => client.request(query, variables);
+  const fetcher = ({ query, variables }: { query: string; variables: { userId?: number } }) => client.request(query, variables);
 
   const { data, error, isLoading, mutate } = useSWR(
     userId ? { query: GET_RESERVATIONS_BY_USER, variables: { userId } } : null,

@@ -6,6 +6,7 @@ import { CREATE_RESERVATION } from '@/src/graphql/reservations';
 import { client } from '@/src/lib/graphql-client';
 import { Book } from '@/src/types/book';
 import toast from 'react-hot-toast';
+import dayjs from 'dayjs';
 
 interface ReservationModalProps {
     book: Book | null;
@@ -18,7 +19,7 @@ export const ReservationModal = ({ book, isOpen, onClose, onSuccess }: Reservati
     const [form] = Form.useForm();
     const [submitting, setSubmitting] = useState(false);
 
-    const handleSubmit = async (values: any) => {
+    const handleSubmit = async (values: { userId: string; dateDevolucion: dayjs.Dayjs, bookId: number }) => {
         setSubmitting(true);
         try {
             await client.request(CREATE_RESERVATION, {

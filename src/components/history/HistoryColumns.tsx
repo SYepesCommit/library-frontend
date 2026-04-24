@@ -25,7 +25,7 @@ export const historyColumns = [
     title: 'Fecha Límite',
     dataIndex: 'dateDevolucion',
     key: 'dateDev',
-    render: (dateDevolucion: string, record: any) => {
+    render: (dateDevolucion: string, record: { returnedAt: string | null }) => {
       const isOverdue = new Date(dateDevolucion) < new Date() && !record.returnedAt;
       return (
         <Text type={isOverdue ? "danger" : "secondary"} strong={isOverdue}>

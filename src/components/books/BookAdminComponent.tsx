@@ -7,13 +7,14 @@ import { CREATE_BOOK, UPDATE_BOOK, DELETE_BOOK } from '@/src/graphql/books';
 import { BookForm } from './BookForm';
 import { BookListTable } from './BookListTable';
 import toast from 'react-hot-toast';
+import { Book } from '@/src/types/book';
 
 export const BookAdminComponent = () => {
   const {books, isLoading, refreshBooks } = useBooks();
-  const [editingBook, setEditingBook] = useState<any>(null);
+  const [editingBook, setEditingBook] = useState<Book | null>(null);
   const [loading, setLoading] = useState(false);
 
-  const handleSubmit = async (values: any) => {
+  const handleSubmit = async (values: Book) => {
     setLoading(true);
     try {
       if (values.id) {

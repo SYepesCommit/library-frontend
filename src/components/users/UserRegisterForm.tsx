@@ -5,6 +5,7 @@ import { UserAddOutlined, MailOutlined, UserOutlined } from '@ant-design/icons';
 import { client } from '@/src/lib/graphql-client';
 import { CREATE_USER } from '@/src/graphql/users';
 import toast from 'react-hot-toast';
+import { User } from '@/src/types/user';
 
 const { Title, Text } = Typography;
 
@@ -16,7 +17,7 @@ export const UserRegisterForm = ({ onSuccess }: UserRegisterFormProps) => {
   const [loading, setLoading] = useState(false);
   const [form] = Form.useForm();
 
-  const onFinish = async (values: any) => {
+  const onFinish = async (values: User) => {
     setLoading(true);
     try {
       await client.request(CREATE_USER, { input: values });

@@ -1,9 +1,10 @@
 import { Space, Button, Tag, Popconfirm, Typography } from 'antd';
 import { EditOutlined, DeleteOutlined, BookOutlined } from '@ant-design/icons';
+import { Book } from '@/src/types/book';
 
 const { Text } = Typography;
 
-export const getBookColumns = (onEdit: (record: any) => void, onDelete: (id: number) => void) => [
+export const getBookColumns = (onEdit: (record: Book) => void, onDelete: (id: number) => void) => [
   { 
     title: 'Título', 
     dataIndex: 'title', 

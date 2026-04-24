@@ -3,8 +3,9 @@ import { Form, Input, Button, Card, Typography, Select } from 'antd';
 import { BookOutlined, UserOutlined, TagOutlined } from '@ant-design/icons';
 import { useEffect } from 'react';
 import { genderOptions } from '@/src/config/book-config';
+import { Book } from '@/src/types/book';
 
-export const BookForm = ({ onSubmit, loading, initialValues }: any) => {
+export const BookForm = ({ onSubmit, loading, initialValues }: { onSubmit: (book: Book) => Promise<void>; loading: boolean; initialValues: Book | null }) => {
   const [form] = Form.useForm();
 
   useEffect(() => {
@@ -15,7 +16,7 @@ export const BookForm = ({ onSubmit, loading, initialValues }: any) => {
     }
   }, [initialValues, form]);
 
-  const handleFinish = async (values: any) => {
+  const handleFinish = async (values: Book) => {
     await onSubmit(values);
     if (!initialValues) {
       form.resetFields();

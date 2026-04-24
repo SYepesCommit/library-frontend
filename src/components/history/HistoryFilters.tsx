@@ -1,10 +1,22 @@
 import { Card, Space, Select, DatePicker, Typography } from 'antd';
 import { UserOutlined, CalendarOutlined } from '@ant-design/icons';
+import dayjs from 'dayjs';
+import { User } from '@/src/types/user';
 
 const { RangePicker } = DatePicker;
 const { Text } = Typography;
 
-export const HistoryFilters = ({ users, onUserChange, onDateChange, loadingUsers }: any) => (
+export const HistoryFilters = ({ 
+  users, 
+  onUserChange, 
+  onDateChange, 
+  loadingUsers 
+}: { 
+  users: User[]; 
+  onUserChange: (value: number) => void; 
+  onDateChange: (dates: [dayjs.Dayjs | null, dayjs.Dayjs | null] | null) => void; 
+  loadingUsers: boolean 
+}) => (
   <Card className="mb-6 shadow-sm border-slate-100 bg-slate-50/50">
     <div className="flex flex-wrap gap-6">
       <div className="flex-1 min-w-[250px]">
@@ -16,7 +28,7 @@ export const HistoryFilters = ({ users, onUserChange, onDateChange, loadingUsers
           loading={loadingUsers}
           onChange={onUserChange}
           suffixIcon={<UserOutlined />}
-          options={users?.map((u: any) => ({ label: u.name, value: u.id }))}
+          options={users?.map((u: User) => ({ label: u.name, value: u.id }))}
         />
       </div>
       <div className="flex-1 min-w-[300px]">

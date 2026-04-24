@@ -1,5 +1,7 @@
+import { User } from "./user";
+
 export interface UserSelectorProps {
-  users: any[];
+  users: User[];
   loading: boolean;
   onSelect: (id: number | undefined) => void;
 }
