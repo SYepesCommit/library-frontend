@@ -21,7 +21,16 @@ Interfaz de usuario moderna y profesional para la gestión de bibliotecas, const
 
 ---
 
-##  Configuración del Entorno
+
+## 1. Instalación y Ejecución
+Clonar el repositorio:
+
+```env
+git clone https://github.com/SYepesCommit/library-frontend.git
+cd library-frontend
+```
+
+##  2. Configuración del Entorno
 
 Para que el frontend se comunique correctamente con el backend, debes configurar las variables de entorno.
 
@@ -32,21 +41,13 @@ Para que el frontend se comunique correctamente con el backend, debes configurar
 NEXT_PUBLIC_API_URL=http://localhost:3000/graphql
 ```
 
-## 1. Instalación y Ejecución
-Clonar el repositorio:
-
-```env
-git clone [https://github.com/SYepesCommit/library-frontend.git](https://github.com/SYepesCommit/library-frontend.git)
-cd library-frontend
-```
-
-2. Instalar dependencias:
+3. Instalar dependencias:
 
 ```env
 pnpm install
 ```
 
-3. Iniciar en modo desarrollo:
+4. Iniciar en modo desarrollo:
 ```env
 pnpm dev
 ```
