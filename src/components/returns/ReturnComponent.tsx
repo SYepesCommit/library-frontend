@@ -96,6 +96,7 @@ export const ReturnsComponent = () => {
           columns={columns} 
           rowKey="id"
           loading={loadingRes}
+          scroll={{ x: 800 }}
           pagination={{ pageSize: 5, hideOnSinglePage: true }}
           locale={{ 
             emptyText: selectedUserId 

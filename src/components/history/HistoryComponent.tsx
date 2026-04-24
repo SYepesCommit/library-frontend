@@ -95,6 +95,7 @@ export const HistoryComponent = () => {
           columns={historyColumns}
           rowKey="id"
           loading={isLoading}
+          scroll={{ x: 800 }}
           pagination={{ 
             pageSize: 10, 
             showTotal: (total) => `Total: ${total} registros`,

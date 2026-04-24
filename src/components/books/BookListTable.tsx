@@ -14,6 +14,7 @@ export const BookListTable = ({ books, loading, onEdit, onDelete }: BookListTabl
       dataSource={books} 
       columns={getBookColumns(onEdit, onDelete)} 
       rowKey="id" 
+      scroll={{ x: 800 }}
       loading={loading}
       pagination={{ pageSize: 8, hideOnSinglePage: true }}
       className="custom-table"

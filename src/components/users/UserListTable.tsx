@@ -18,6 +18,7 @@ export const UserListTable = ({ users, loading }: Readonly<UserListTableProps>) 
       columns={userColumns} 
       rowKey="id"
       loading={loading}
+      scroll={{ x: 800 }}
       pagination={{ pageSize: 8 }}
       className="custom-table"
       locale={{ emptyText: 'No hay usuarios registrados aún' }}
