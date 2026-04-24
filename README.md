@@ -27,15 +27,15 @@ Clonar el repositorio:
 
 ```env
 git clone https://github.com/SYepesCommit/library-frontend.git
-cd library-frontend
 ```
+
 
 ##  2. Configuración del Entorno
 
 Para que el frontend se comunique correctamente con el backend, debes configurar las variables de entorno.
 
 1. Crea un archivo `.env` en la raíz de este proyecto.
-2. Añade la URL de tu servidor GraphQL (NestJS) (El puerto puede variar en cuestion del ambiente de prueba que este corriendo, ajustar el puerto si es necesario por el que levante tanto el back como el front):
+2. Añade la URL de tu servidor GraphQL (NestJS) (El puerto puede variar en cuestion del ambiente de prueba que este corriendo, ajustar el puerto si es necesario):
 
 ```env
 NEXT_PUBLIC_API_URL=http://localhost:3000/graphql
