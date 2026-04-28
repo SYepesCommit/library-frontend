@@ -5,15 +5,11 @@ import { UserAddOutlined, MailOutlined, UserOutlined } from '@ant-design/icons';
 import { client } from '@/src/lib/graphql-client';
 import { CREATE_USER } from '@/src/graphql/users';
 import toast from 'react-hot-toast';
-import { User } from '@/src/types/user';
+import { User, UserRegisterFormProps } from '@/src/types/user';
 
 const { Title, Text } = Typography;
 
-interface UserRegisterFormProps {
-  onSuccess: () => void;
-}
-
-export const UserRegisterForm = ({ onSuccess }: UserRegisterFormProps) => {
+export const UserRegisterForm = ({ onSuccess }: Readonly<UserRegisterFormProps>) => {
   const [loading, setLoading] = useState(false);
   const [form] = Form.useForm();
 

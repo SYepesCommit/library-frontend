@@ -1,3 +1,6 @@
+
+export type BookStatusFilter = 'all' | 'available' | 'reserved';
+
 export interface Book {
   id: number;
   title: string;
@@ -17,4 +20,9 @@ export interface BookListTableProps {
   loading: boolean;
   onEdit: (record: Book) => void;
   onDelete: (id: number) => void;
+}
+
+export interface BookFiltersProps {
+  onSearchChange: (value: string) => void;
+  onStatusChange: (value: BookStatusFilter) => void;
 }

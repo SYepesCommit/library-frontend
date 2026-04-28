@@ -51,8 +51,6 @@ export const ReturnsComponent = () => {
     try {
       await client.request(RETURN_BOOK, { id: Number(record.id) });
       toast.success(`Libro "${record.book.title}" devuelto correctamente`);
-      
-      // Sincronización multi-estado
       refreshReservations(); 
       refreshBooks(); 
     } catch (error) {
@@ -73,21 +71,19 @@ export const ReturnsComponent = () => {
 
   return (
     <div className="animate-fadeIn max-w-5xl mx-auto">
-      {/* Header Informativo */}
       <div className="flex flex-col mb-8 gap-2">
         <Title level={2} className="!mb-0 text-slate-800">Gestión de Devoluciones</Title>
         <Text className="text-slate-500">Selecciona un usuario para marcar las devoluciones.</Text>
       </div>
 
-      {/* Selector de Usuario (Abstracción de búsqueda) */}
       <UserSelector 
         users={users} 
         loading={loadingUsers} 
         onSelect={setSelectedUserId} 
       />
 
-      {/* Contenedor de la Tabla de Préstamos Activos */}
       <Card 
+      style={{ marginTop: 16}}
         className="shadow-sm border-slate-100 overflow-hidden" 
         title={<Text strong>Libros por entregar</Text>}
       >

@@ -1,13 +1,23 @@
 import { Space, Button, Typography, Tag } from 'antd';
 import { BookOutlined, RollbackOutlined } from '@ant-design/icons';
+import dayjs from 'dayjs';
+import { Reservation } from '@/src/types/reservation';
 
 const { Text } = Typography;
 
-export const getReturnColumns = (onReturn: (record: any) => void, processingId: number | null) => [
+/**
+ * Genera las columnas para la tabla de procesos de devolución.
+ * Incluye lógica de ordenamiento y detección visual de mora (overdue).
+ * * @param onReturn - Función para procesar la devolución de un ejemplar.
+ * @param processingId - ID de la reserva que se está procesando actualmente (para el estado loading).
+ * @returns {Array} Configuración de columnas optimizada.
+ */
+export const getReturnColumns = (onReturn: (record: Reservation) => void, processingId: number | null) => [
   {
     title: 'Libro',
     dataIndex: ['book', 'title'],
     key: 'title',
+    sorter: (a: Reservation, b: Reservation) => (a.book?.title ?? '').localeCompare(b.book?.title ?? ''),
     render: (text: string) => (
       <Space>
         <BookOutlined className="text-blue-500" />
@@ -19,13 +29,21 @@ export const getReturnColumns = (onReturn: (record: any) => void, processingId: 
     title: 'Fecha Límite',
     dataIndex: 'dateDevolucion',
     key: 'date',
-    render: (dateDevolucion: string, record: any) => {
-      const isOverdue = new Date(dateDevolucion) < new Date() && !record.returnedAt;
+    sorter: (a: Reservation, b: Reservation) => dayjs(a.dateDevolucion).unix() - dayjs(b.dateDevolucion).unix(),
+    render: (dateDevolucion: string, record: Reservation) => {
+      const isOverdue = dayjs(dateDevolucion).isBefore(dayjs()) && !record.returnedAt;
+      
       return (
-        <Text type={isOverdue ? "danger" : "secondary"} strong={isOverdue}>
-          {new Date(dateDevolucion).toLocaleDateString()}
-          {isOverdue && <Tag color="error" className="ml-2">!Plazo Excedido!</Tag>}
-        </Text>
+        <Space direction="vertical" size={0}>
+          <Text type={isOverdue ? "danger" : "secondary"} strong={isOverdue}>
+            {dayjs(dateDevolucion).format('DD/MM/YYYY')}
+          </Text>
+          {isOverdue && (
+            <Tag color="error" className="border-none bg-red-50 text-red-600 text-[10px] uppercase font-bold">
+              ¡Plazo Excedido!
+            </Tag>
+          )}
+        </Space>
       );
     }
   },
@@ -33,13 +51,13 @@ export const getReturnColumns = (onReturn: (record: any) => void, processingId: 
     title: 'Acción',
     key: 'action',
     align: 'right' as any,
-    render: (_: any, record: any) => (
+    render: (_: any, record: Reservation) => (
       <Button
         type="primary"
         icon={<RollbackOutlined />}
         loading={processingId === record.id}
         onClick={() => onReturn(record)}
-        className="bg-emerald-600 hover:bg-emerald-700 border-none rounded-md"
+        className="bg-emerald-600 hover:bg-emerald-700 border-none rounded-md shadow-sm transition-all"
       >
         Devolver
       </Button>

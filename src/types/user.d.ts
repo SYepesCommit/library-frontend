@@ -8,3 +8,7 @@ export interface UserListTableProps {
   users: any[];
   loading: boolean;
 }
+
+export interface UserRegisterFormProps {
+  onSuccess: () => void;
+}

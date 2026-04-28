@@ -27,3 +27,10 @@ export interface FilterProps {
   startDate?: string;
   endDate?: string;
 }
+
+export interface ReservationModalProps {
+    book: Book | null;
+    isOpen: boolean;
+    onClose: () => void;
+    onSuccess: () => void;
+}

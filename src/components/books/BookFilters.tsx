@@ -3,17 +3,11 @@
 import { Input, Select, Card } from 'antd';
 import { SearchOutlined, FilterOutlined } from '@ant-design/icons';
 import { statusOptions } from '@/src/config/book-config';
+import { BookFiltersProps, BookStatusFilter } from '@/src/types/book';
 
 const { Search } = Input;
 
-export type BookStatusFilter = 'all' | 'available' | 'reserved';
-
-interface BookFiltersProps {
-  onSearchChange: (value: string) => void;
-  onStatusChange: (value: BookStatusFilter) => void;
-}
-
-export const BookFilters = ({ onSearchChange, onStatusChange }: BookFiltersProps) => {
+export const BookFilters = ({ onSearchChange, onStatusChange }: Readonly<BookFiltersProps>) => {
   return (
     <Card className="shadow-sm border-slate-100 bg-slate-50/50" style={{
       marginBottom: 24

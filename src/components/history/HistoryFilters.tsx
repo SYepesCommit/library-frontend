@@ -1,43 +1,53 @@
-import { Card, Space, Select, DatePicker, Typography } from 'antd';
-import { UserOutlined, CalendarOutlined } from '@ant-design/icons';
-import dayjs from 'dayjs';
-import { User } from '@/src/types/user';
+import { Card, Select, DatePicker, Typography } from 'antd';
+import { UserOutlined, BookOutlined, CalendarOutlined } from '@ant-design/icons';
+import { HistoryFiltersProps } from '@/src/types/history';
 
 const { RangePicker } = DatePicker;
 const { Text } = Typography;
 
+/**
+ * Componente de filtrado especializado para el módulo de auditoría.
+ * * Implementa el patrón de "Componente Controlado" para permitir que el padre
+ * resetee los campos visuales al cambiar de contexto (Usuario -> Libro).
+ * * @component
+ */
 export const HistoryFilters = ({ 
-  users, 
-  onUserChange, 
+  mode, 
+  data, 
+  onEntityChange, 
   onDateChange, 
-  loadingUsers 
-}: { 
-  users: User[]; 
-  onUserChange: (value: number) => void; 
-  onDateChange: (dates: [dayjs.Dayjs | null, dayjs.Dayjs | null] | null) => void; 
-  loadingUsers: boolean 
-}) => (
-  <Card className="mb-6 shadow-sm border-slate-100 bg-slate-50/50" style={{ marginBottom:16}}>
+  loading,
+  entityId,
+  dateValues
+}: Readonly<HistoryFiltersProps>) => (
+  <Card className="mb-6 shadow-sm border-slate-100 bg-slate-50/50" style={{ marginBottom: 16 }}>
     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
       <div className="w-full">
-        <Text strong className="block mb-2 text-slate-500 text-xs uppercase text-nowrap">Filtrar Usuario</Text>
+        <Text strong className="block mb-2 text-slate-500 text-xs uppercase">
+          {mode === 'user' ? 'Filtrar Usuario' : 'Filtrar Libro'}
+        </Text>
         <Select
           showSearch
-          placeholder="Selecciona un usuario"
+          value={entityId}
+          placeholder={mode === 'user' ? "Selecciona un usuario" : "Selecciona un libro"}
           className="w-full"
-          loading={loadingUsers}
-          onChange={onUserChange}
-          suffixIcon={<UserOutlined />}
-          options={users?.map((u: User) => ({ label: u.name, value: u.id }))}
+          loading={loading}
+          onChange={onEntityChange}
+          suffixIcon={mode === 'user' ? <UserOutlined /> : <BookOutlined />}
+          options={data}
+          optionFilterProp="label"
+          allowClear
         />
       </div>
       <div className="w-full">
-        <Text strong className="block mb-2 text-slate-500 text-xs uppercase text-nowrap">Rango de Fechas</Text>
+        <Text strong className="block mb-2 text-slate-500 text-xs uppercase">Rango de Fechas</Text>
         <RangePicker 
           className="w-full" 
+          value={dateValues}
           onChange={onDateChange}
           placeholder={['Desde', 'Hasta']}
           suffixIcon={<CalendarOutlined />}
+          allowClear
         />
       </div>
     </div>

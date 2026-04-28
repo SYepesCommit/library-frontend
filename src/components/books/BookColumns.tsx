@@ -4,11 +4,20 @@ import { Book } from '@/src/types/book';
 
 const { Text } = Typography;
 
+/**
+ * Genera la configuración de columnas para la tabla de libros.
+ * Incluye lógica de ordenamiento (sorters) y renderizado personalizado.
+ * * @param onEdit - Callback ejecutado al presionar el botón de editar.
+ * @param onDelete - Callback ejecutado al confirmar la eliminación.
+ * @returns {Array} Configuración de columnas para el componente Table de AntD.
+ */
 export const getBookColumns = (onEdit: (record: Book) => void, onDelete: (id: number) => void) => [
   { 
     title: 'Título', 
     dataIndex: 'title', 
     key: 'title',
+    /** Ordenamiento alfabético por título */
+    sorter: (a: Book, b: Book) => a.title.localeCompare(b.title),
     render: (text: string) => (
       <Space>
         <BookOutlined className="text-blue-500" />
@@ -16,17 +25,28 @@ export const getBookColumns = (onEdit: (record: Book) => void, onDelete: (id: nu
       </Space>
     )
   },
-  { title: 'Autor', dataIndex: 'author', key: 'author' },
+  { 
+    title: 'Autor', 
+    dataIndex: 'author', 
+    key: 'author',
+    sorter: (a: Book, b: Book) => a.author.localeCompare(b.author),
+  },
   {
     title: 'Género',
     dataIndex: 'gender',
     key: 'gender',
-    render: (gender: string) => <Tag color="blue" className="border-none bg-blue-50 text-blue-600">{gender}</Tag>
+    sorter: (a: Book, b: Book) => (a.gender || '').localeCompare(b.gender || ''),
+    render: (gender: string) => (
+      <Tag color="blue" className="border-none bg-blue-50 text-blue-600">
+        {gender}
+      </Tag>
+    )
   },
   {
     title: 'Estado',
     dataIndex: 'isAvailable',
     key: 'status',
+    sorter: (a: Book, b: Book) => Number(a.isAvailable) - Number(b.isAvailable),
     render: (avail: boolean) => (
       <Tag color={avail ? 'green' : 'red'} className="rounded-full px-3">
         {avail ? 'Libre' : 'Prestado'}
@@ -37,7 +57,7 @@ export const getBookColumns = (onEdit: (record: Book) => void, onDelete: (id: nu
     title: 'Acciones',
     key: 'actions',
     align: 'right' as any,
-    render: (_: any, record: any) => (
+    render: (_: any, record: Book) => (
       <Space>
         <Button 
           type="text"

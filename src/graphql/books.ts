@@ -28,6 +28,20 @@ export const UPDATE_BOOK = gql`
   }
 `;
 
+export const GET_BOOK_HISTORY = gql`
+  query GetBookHistory($bookId: Int!, $start: DateTime, $end: DateTime) {
+    bookReservations(bookId: $bookId, startDate: $start, endDate: $end) {
+      id
+      dateReservation
+      dateDevolucion
+      returnedAt
+      user {
+        name
+      }
+    }
+  }
+`;
+
 export const DELETE_BOOK = gql`
   mutation RemoveBook($id: Int!) {
     removeBook(id: $id) {

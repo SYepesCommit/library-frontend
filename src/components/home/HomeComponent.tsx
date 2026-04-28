@@ -5,10 +5,10 @@ import { Typography, Badge, Empty, Card } from 'antd';
 import { LoadingState } from '../shared/LoadingState';
 import { ErrorState } from '../shared/ErrorState';
 import { useBooks } from '@/src/hooks/useBooks';
-import { Book } from '@/src/types/book';
+import { Book, BookStatusFilter } from '@/src/types/book';
 import { ReservationModal } from '../reservations/ReservationModal';
 import { BookList } from '../books/BookList';
-import { BookFilters, BookStatusFilter } from '../books/BookFilters';
+import { BookFilters } from '../books/BookFilters';
 
 const { Title } = Typography;
 
